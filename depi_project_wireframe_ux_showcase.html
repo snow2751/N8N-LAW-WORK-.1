@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>النظام القانوني الموحد — Unified Legal System | DEPI Slide 3 Showcase</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cairo for Arabic & Inter/JetBrains Mono for English/Code -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        depi: {
+                            darkGreen: '#047954',
+                            emerald: '#0FAB7D',
+                            blue: '#336EA8',
+                            gold: '#D7B119',
+                            navy: '#0F172A'
+                        }
+                    },
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Cairo', 'Inter', sans-serif;
+            background-color: #EEF4F2;
+            overflow-x: hidden;
+        }
+
+        /* Editable text styling hint */
+        [contenteditable="true"] {
+            outline: none;
+            transition: all 0.15s ease;
+            border-bottom: 1px dashed transparent;
+        }
+        [contenteditable="true"]:hover {
+            border-bottom: 1px dashed #0FAB7D;
+            background-color: rgba(15, 171, 125, 0.08);
+            border-radius: 4px;
+        }
+        [contenteditable="true"]:focus {
+            border-bottom: 2px solid #047954;
+            background-color: rgba(255, 255, 255, 0.95);
+            color: #047954;
+            padding: 0 4px;
+            border-radius: 4px;
+        }
+
+        /* Low-Fi Wireframe Blueprint Mode */
+        .wireframe-mode .wf-box {
+            background: #ffffff !important;
+            background-image: none !important;
+            border: 2px dashed #64748b !important;
+            box-shadow: none !important;
+            color: #1e293b !important;
+        }
+        .wireframe-mode .wf-header {
+            background: repeating-linear-gradient(
+                45deg,
+                #f8fafc,
+                #f8fafc 12px,
+                #f1f5f9 12px,
+                #f1f5f9 24px
+            ) !important;
+            color: #0f172a !important;
+            border: 2px dashed #336EA8 !important;
+        }
+        .wireframe-mode .wf-btn {
+            background: #e2e8f0 !important;
+            color: #0f172a !important;
+            border: 2px solid #334155 !important;
+            box-shadow: none !important;
+        }
+        .wireframe-mode .wf-badge {
+            background: #f1f5f9 !important;
+            color: #334155 !important;
+            border: 1px dashed #475569 !important;
+        }
+
+        /* UX Annotation Callout Pulse */
+        @keyframes pulseGold {
+            0% { transform: scale(0.97); box-shadow: 0 0 0 0 rgba(215, 177, 25, 0.65); }
+            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(215, 177, 25, 0); }
+            100% { transform: scale(0.97); box-shadow: 0 0 0 0 rgba(215, 177, 25, 0); }
+        }
+        .ux-callout {
+            animation: pulseGold 2.2s infinite;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #047954;
+            border-radius: 9999px;
+        }
+    </style>
+</head>
+<body class="min-h-screen text-slate-800 flex flex-col">
+
+    <!-- ================= TOP DEPI BRANDING & PRESENTER CONTROL HEADER ================= -->
+    <header class="bg-gradient-to-r from-depi-darkGreen via-[#068860] to-depi-blue text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+            <!-- Brand & Project Title -->
+            <div class="flex items-center gap-3">
+                <div class="bg-white text-depi-darkGreen font-black px-3 py-1.5 rounded-xl shadow flex items-center gap-2 text-sm">
+                    <i class="fa-solid fa-scale-balanced text-depi-gold text-base"></i>
+                    <span>DEPI • LegalTech AI</span>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <span class="bg-depi-gold text-slate-900 text-[11px] font-extrabold px-2 py-0.5 rounded uppercase tracking-wider">Slide 03 • Project Wireframe & UX</span>
+                        <h1 class="font-extrabold text-base sm:text-lg md:text-xl tracking-tight" contenteditable="true" id="mainHeaderTitle" data-ar="النظام القانوني الموحد (Unified Legal System)" data-en="Unified Legal System — Enterprise Legal AI">
+                            النظام القانوني الموحد (Unified Legal System)
+                        </h1>
+                    </div>
+                    <p class="text-[11px] text-emerald-100 hidden sm:block" id="mainHeaderSub" data-ar="DEPI Graduation Project — Slide 3: Project Wireframe, User Journey & UX Architecture" data-en="DEPI Graduation Project — Slide 3: Project Wireframe, User Journey & UX Architecture">
+                        <i class="fa-solid fa-wand-magic-sparkles text-depi-gold me-1"></i>
+                        DEPI Graduation Project — Slide 3: Project Wireframe, User Journey & UX Architecture
+                    </p>
+                </div>
+            </div>
+
+            <!-- Interactive Presenter Controls -->
+            <div class="flex items-center flex-wrap gap-2">
+                <!-- Language Toggle (AR / EN) -->
+                <button onclick="toggleLanguage()" id="langBtn" class="bg-white text-depi-darkGreen hover:bg-emerald-50 px-3 py-1.5 rounded-xl text-xs font-extrabold flex items-center gap-1.5 transition shadow">
+                    <i class="fa-solid fa-globe text-depi-blue"></i>
+                    <span id="langBtnText">English (LTR)</span>
+                </button>
+
+                <!-- Low-Fi Wireframe Toggle -->
+                <button onclick="toggleWireframeMode()" id="wfBtn" class="bg-white/15 hover:bg-white/25 border border-white/30 px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2 transition">
+                    <i class="fa-solid fa-compass-drafting text-depi-gold"></i>
+                    <span id="wfBtnText">وضع التخطيط الهيكلي (Wireframe: إيقاف)</span>
+                </button>
+
+                <!-- UX Callout Toggle -->
+                <button onclick="toggleUXCallouts()" id="uxBtn" class="bg-depi-gold text-slate-900 hover:bg-yellow-400 px-3 py-1.5 rounded-xl text-xs font-extrabold flex items-center gap-1.5 transition shadow">
+                    <i class="fa-solid fa-lightbulb"></i>
+                    <span id="uxBtnText">ملاحظات UX: مفعّلة</span>
+                </button>
+
+                <!-- Bilingual PDF Modal Trigger -->
+                <button onclick="openPdfModal()" class="bg-slate-900/60 hover:bg-slate-900 border border-white/25 px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 transition">
+                    <i class="fa-solid fa-file-pdf text-rose-400"></i>
+                    <span id="pdfBtnText">معاينة التقرير المزدوج (AR/EN PDF)</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- DEPI Official Color Bar + Workflow Architecture Strip -->
+        <div class="bg-slate-950/35 px-4 py-1.5 text-[11px] flex flex-wrap items-center justify-between gap-2 border-t border-white/10">
+            <div class="flex items-center gap-3 flex-wrap">
+                <span class="opacity-85 font-semibold">الألوان المعتمدة (Mandatory DEPI Palette):</span>
+                <span class="flex items-center gap-1 font-mono"><span class="w-2.5 h-2.5 rounded-full bg-[#047954] inline-block border border-white"></span> #047954</span>
+                <span class="flex items-center gap-1 font-mono"><span class="w-2.5 h-2.5 rounded-full bg-[#0FAB7D] inline-block border border-white"></span> #0FAB7D</span>
+                <span class="flex items-center gap-1 font-mono"><span class="w-2.5 h-2.5 rounded-full bg-[#336EA8] inline-block border border-white"></span> #336EA8</span>
+                <span class="flex items-center gap-1 font-mono"><span class="w-2.5 h-2.5 rounded-full bg-[#D7B119] inline-block border border-white"></span> #D7B119</span>
+            </div>
+            <div class="flex items-center gap-2 text-emerald-200 font-medium">
+                <span><i class="fa-solid fa-database me-1"></i>PostgreSQL Stateful Memory</span>
+                <span>•</span>
+                <span><i class="fa-solid fa-building-columns me-1"></i>9 جهات حكومية `.gov.eg`</span>
+                <span>•</span>
+                <span><i class="fa-brands fa-whatsapp me-1"></i>أوامر الإدارة الذاتية</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ================= MAIN CONTAINER ================= -->
+    <main class="max-w-7xl w-full mx-auto px-4 py-5 flex-1 flex flex-col gap-5" id="appRoot">
+
+        <!-- 1. INTERACTIVE USER JOURNEY & N8N PIPELINE BAR (Onboarding -> Core Features) -->
+        <section class="wf-box bg-white rounded-2xl shadow-sm border border-slate-200/90 p-4 sm:p-5 relative">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 pb-3 border-b border-slate-100">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-9 h-9 rounded-xl bg-depi-darkGreen text-white flex items-center justify-center font-bold shadow-sm">
+                        <i class="fa-solid fa-diagram-project"></i>
+                    </div>
+                    <div>
+                        <h2 class="font-extrabold text-sm sm:text-base text-slate-800" contenteditable="true" id="journeyTitle" data-ar="خريطة رحلة المستخدم وتدفق النظام القانوني الموحد (User Journey: From Onboarding to Core Features)" data-en="Unified Legal System User Journey (From Omnichannel Onboarding to Grounded Legal Delivery)">
+                            خريطة رحلة المستخدم وتدفق النظام القانوني الموحد (User Journey: From Onboarding to Core Features)
+                        </h2>
+                        <p class="text-xs text-slate-500" id="journeySubtitle" data-ar="اضغط على أي مرحلة من المراحل الأربع للانتقال مباشرة إلى واجهة المستخدم الخاصة بها" data-en="Click any of the 4 stages below to inspect its interactive wireframe and UX architecture">اضغط على أي مرحلة من المراحل الأربع للانتقال مباشرة إلى واجهة المستخدم الخاصة بها</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2 self-start sm:self-auto">
+                    <span class="wf-badge bg-emerald-50 text-depi-darkGreen border border-emerald-200 text-[11px] font-bold px-3 py-1 rounded-full">
+                        <i class="fa-solid fa-check-double text-depi-emerald me-1"></i> سؤال واحد في كل رسالة • بدون قوائم معقدة
+                    </span>
+                </div>
+            </div>
+
+            <!-- 4 Interactive Journey Steps -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+                <!-- Stage 1 -->
+                <div onclick="switchMainView('intake')" id="journeyCard-intake" class="journey-card cursor-pointer rounded-xl p-3.5 border-2 border-depi-darkGreen bg-emerald-50/60 transition hover:shadow-md relative">
+                    <div class="flex items-center justify-between mb-1.5">
+                        <span class="text-[11px] font-extrabold px-2.5 py-0.5 rounded-full bg-depi-darkGreen text-white">1. استقبال متعدد القنوات</span>
+                        <div class="flex items-center gap-1 text-depi-darkGreen">
+                            <i class="fa-brands fa-whatsapp text-base"></i>
+                            <i class="fa-brands fa-telegram text-base"></i>
+                        </div>
+                    </div>
+                    <h3 class="font-bold text-xs sm:text-sm text-slate-800 mb-1" contenteditable="true" onclick="event.stopPropagation()">Omnichannel Intake (WhatsApp & Telegram)</h3>
+                    <p class="text-[11px] text-slate-600 leading-relaxed" contenteditable="true" onclick="event.stopPropagation()">
+                        رد ترحيبي فوري (`Fast First Reply`)، استقبال النصوص والمرفقات عبر واتساب وتليجرام، وفتح ملف قضية موحد (`LC-2026`).
+                    </p>
+                    <div class="mt-2 pt-1.5 border-t border-emerald-200/70 flex items-center justify-between text-[10px] font-bold text-depi-darkGreen">
+                        <span>UX: صفر انتظار • نقطة دخول موحدة</span>
+                        <span>عرض الواجهة <i class="fa-solid fa-arrow-left ms-1"></i></span>
+                    </div>
+                </div>
+
+                <!-- Stage 2 -->
+                <div onclick="switchMainView('intake'); loadScenario('contract');" id="journeyCard-analysis" class="journey-card cursor-pointer rounded-xl p-3.5 border-2 border-slate-200 bg-white transition hover:border-depi-emerald hover:shadow-md relative">
+                    <div class="flex items-center justify-between mb-1.5">
+                        <span class="text-[11px] font-extrabold px-2.5 py-0.5 rounded-full bg-depi-emerald text-white">2. التحليل التراكمي وفهم الوقائع</span>
+                        <i class="fa-solid fa-microchip text-depi-emerald text-base"></i>
+                    </div>
+                    <h3 class="font-bold text-xs sm:text-sm text-slate-800 mb-1" contenteditable="true" onclick="event.stopPropagation()">Progressive Case Analysis & OCR/Audio</h3>
+                    <p class="text-[11px] text-slate-600 leading-relaxed" contenteditable="true" onclick="event.stopPropagation()">
+                        قراءة المستندات والصوت عبر `Gemini 2.5 Flash`، حوار بسؤال واحد في كل رسالة، وتحديث تراكمي في `PostgreSQL` دون تكرار الأسئلة.
+                    </p>
+                    <div class="mt-2 pt-1.5 border-t border-slate-100 flex items-center justify-between text-[10px] font-bold text-depi-emerald">
+                        <span>UX: ذاكرة دائمة • تقليل العبء الذهني</span>
+                        <span>عرض التحليل <i class="fa-solid fa-arrow-left ms-1"></i></span>
+                    </div>
+                </div>
+
+                <!-- Stage 3 -->
+                <div onclick="switchMainView('contracts')" id="journeyCard-contracts" class="journey-card cursor-pointer rounded-xl p-3.5 border-2 border-slate-200 bg-white transition hover:border-depi-blue hover:shadow-md relative">
+                    <div class="flex items-center justify-between mb-1.5">
+                        <span class="text-[11px] font-extrabold px-2.5 py-0.5 rounded-full bg-depi-blue text-white">3. المهام التخصصية والعقود</span>
+                        <i class="fa-solid fa-file-contract text-depi-blue text-base"></i>
+                    </div>
+                    <h3 class="font-bold text-xs sm:text-sm text-slate-800 mb-1" contenteditable="true" onclick="event.stopPropagation()">Contract Review Bilingual PDF & Deadlines</h3>
+                    <p class="text-[11px] text-slate-600 leading-relaxed" contenteditable="true" onclick="event.stopPropagation()">
+                        مراجعة العقود وإصدار تقرير PDF مزدوج (عربي/إنجليزي) بالصياغات البديلة، وحساب المواعيد القانونية المسندة للمصادر الرسمية.
+                    </p>
+                    <div class="mt-2 pt-1.5 border-t border-slate-100 flex items-center justify-between text-[10px] font-bold text-depi-blue">
+                        <span>UX: تقارير ثنائية اللغة جاهزة للطباعة</span>
+                        <span>عرض الواجهة <i class="fa-solid fa-arrow-left ms-1"></i></span>
+                    </div>
+                </div>
+
+                <!-- Stage 4 -->
+                <div onclick="switchMainView('lawyer')" id="journeyCard-lawyer" class="journey-card cursor-pointer rounded-xl p-3.5 border-2 border-slate-200 bg-white transition hover:border-depi-gold hover:shadow-md relative">
+                    <div class="flex items-center justify-between mb-1.5">
+                        <span class="text-[11px] font-extrabold px-2.5 py-0.5 rounded-full bg-depi-gold text-slate-900">4. لوحة التحكم والرصد التشريعي</span>
+                        <i class="fa-solid fa-gavel text-amber-600 text-base"></i>
+                    </div>
+                    <h3 class="font-bold text-xs sm:text-sm text-slate-800 mb-1" contenteditable="true" onclick="event.stopPropagation()">Admin Command Center & .gov.eg Monitor</h3>
+                    <p class="text-[11px] text-slate-600 leading-relaxed" contenteditable="true" onclick="event.stopPropagation()">
+                        إدارة التذاكر، التحقق البشري من إيصالات الدفع (`دفع #` / `رد #`)، والرصد الآلي كل 12 ساعة لـ 9 جهات رسمية `.gov.eg` و`alamiria.com`.
+                    </p>
+                    <div class="mt-2 pt-1.5 border-t border-slate-100 flex items-center justify-between text-[10px] font-bold text-amber-700">
+                        <span>UX: إشراف بشري محكم • رصد تشريعي</span>
+                        <span>عرض اللوحة <i class="fa-solid fa-arrow-left ms-1"></i></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. NAVIGATION TABS BAR -->
+        <div class="bg-slate-900 text-white p-1.5 rounded-2xl shadow-md flex flex-wrap items-center justify-between gap-2">
+            <div class="flex items-center flex-wrap gap-1.5">
+                <button onclick="switchMainView('intake')" id="navTab-intake" class="px-4 py-2 rounded-xl text-xs font-extrabold transition flex items-center gap-2 bg-depi-emerald text-white shadow">
+                    <i class="fa-solid fa-comments"></i>
+                    <span id="tabText-intake">1. محاكي الاستقبال الذكي (Client Intake & Case Record)</span>
+                </button>
+                <button onclick="switchMainView('contracts')" id="navTab-contracts" class="px-4 py-2 rounded-xl text-xs font-extrabold transition flex items-center gap-2 text-slate-300 hover:text-white">
+                    <i class="fa-solid fa-file-signature"></i>
+                    <span id="tabText-contracts">2. مراجعة العقود والمواعيد (Bilingual PDF & Deadlines)</span>
+                </button>
+                <button onclick="switchMainView('lawyer')" id="navTab-lawyer" class="px-4 py-2 rounded-xl text-xs font-extrabold transition flex items-center gap-2 text-slate-300 hover:text-white">
+                    <i class="fa-solid fa-table-columns"></i>
+                    <span id="tabText-lawyer">3. لوحة الإدارة والرصد التشريعي (Admin & .gov.eg Monitor)</span>
+                </button>
+                <button onclick="switchMainView('slide3')" id="navTab-slide3" class="px-4 py-2 rounded-xl text-xs font-extrabold transition flex items-center gap-2 text-slate-300 hover:text-white">
+                    <i class="fa-solid fa-layer-group text-depi-gold"></i>
+                    <span id="tabText-slide3">4. عرض الشريحة 3 الكامل (Slide 3 Full 3-Column View)</span>
+                </button>
+            </div>
+
+            <div class="hidden xl:flex items-center gap-2 pe-3 text-[11px] text-slate-300 font-mono">
+                <span class="w-2 h-2 rounded-full bg-depi-emerald animate-pulse"></span>
+                <span>Unified Legal System • Africa/Cairo</span>
+            </div>
+        </div>
+
+        <!-- ========================================================================================= -->
+        <!-- VIEW 1: CLIENT OMNICHANNEL INTAKE SIMULATOR + LIVE POSTGRES CASE RECORD                   -->
+        <!-- ========================================================================================= -->
+        <section id="view-intake" class="view-section grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+            
+            <!-- Right Column (RTL): Omnichannel Chat Simulator (7 Cols) -->
+            <div class="lg:col-span-7 wf-box bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col relative">
+                
+                <!-- UX Callout -->
+                <div class="ux-callout absolute top-14 left-4 z-20 bg-depi-gold text-slate-900 text-[11px] font-extrabold px-3 py-1 rounded-full shadow-md flex items-center gap-1.5">
+                    <i class="fa-solid fa-brain"></i>
+                    <span>UX: سؤال استكمال واحد فقط في كل رسالة • رسالة التوضيح لا تُخصم من الباقة المجانية</span>
+                </div>
+
+                <!-- Chat App Header -->
+                <div class="wf-header bg-gradient-to-r from-depi-darkGreen to-[#075E54] text-white px-4 py-3 flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-white/15 border border-white/30 flex items-center justify-center font-extrabold text-base relative">
+                            <i class="fa-solid fa-scale-balanced text-depi-gold"></i>
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-white absolute bottom-0 right-0"></span>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <h3 class="font-extrabold text-sm" contenteditable="true">مساعد النظام القانوني الموحد (Unified Legal AI Assistant)</h3>
+                                <span id="activeChannelBadge" class="bg-emerald-500/30 border border-emerald-300/40 text-[10px] px-2 py-0.5 rounded-full font-bold">WhatsApp WAHA</span>
+                            </div>
+                            <p class="text-[11px] text-emerald-100">متصل الآن • يقرأ PDF، Word، الصور، والرسائل الصوتية تلقائياً</p>
+                        </div>
+                    </div>
+
+                    <!-- Channel Switcher -->
+                    <div class="flex items-center bg-black/25 p-1 rounded-xl gap-1 text-xs">
+                        <button onclick="setChatChannel('whatsapp')" id="chBtn-whatsapp" class="px-2.5 py-1 rounded-lg bg-depi-emerald text-white font-bold flex items-center gap-1">
+                            <i class="fa-brands fa-whatsapp"></i> واتساب
+                        </button>
+                        <button onclick="setChatChannel('telegram')" id="chBtn-telegram" class="px-2.5 py-1 rounded-lg text-emerald-100 hover:text-white font-semibold flex items-center gap-1">
+                            <i class="fa-brands fa-telegram"></i> تليجرام
+                        </button>
+                        <button onclick="setChatChannel('internal')" id="chBtn-internal" class="px-2.5 py-1 rounded-lg text-emerald-100 hover:text-white font-semibold flex items-center gap-1">
+                            <i class="fa-solid fa-briefcase"></i> البوابة الداخلية
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Scenario Preset Selector Bar -->
+                <div class="bg-slate-100 px-4 py-2.5 border-b border-slate-200 flex items-center gap-2 overflow-x-auto">
+                    <span class="text-[11px] font-extrabold text-slate-600 shrink-0"><i class="fa-solid fa-flask text-depi-blue me-1"></i>جرب سيناريو من الورك فلو:</span>
+                    <button onclick="loadScenario('rent')" id="scenBtn-rent" class="scen-btn shrink-0 bg-depi-darkGreen text-white text-[11px] font-bold px-3 py-1 rounded-lg shadow-sm transition">
+                        1. دعوى إيجار قديم (سؤال واحد متدرج)
+                    </button>
+                    <button onclick="loadScenario('contract')" id="scenBtn-contract" class="scen-btn shrink-0 bg-white hover:bg-emerald-50 text-slate-700 border border-slate-300 text-[11px] font-bold px-3 py-1 rounded-lg transition">
+                        2. رفع عقد توزيع (PDF/Word) للمراجعة
+                    </button>
+                    <button onclick="loadScenario('deadline')" id="scenBtn-deadline" class="scen-btn shrink-0 bg-white hover:bg-emerald-50 text-slate-700 border border-slate-300 text-[11px] font-bold px-3 py-1 rounded-lg transition">
+                        3. حساب ميعاد استئناف + عطلات رسمية
+                    </button>
+                    <button onclick="loadScenario('receipt')" id="scenBtn-receipt" class="scen-btn shrink-0 bg-white hover:bg-emerald-50 text-slate-700 border border-slate-300 text-[11px] font-bold px-3 py-1 rounded-lg transition">
+                        4. إرسال إيصال إنستاباي (100 ج.م)
+                    </button>
+                </div>
+
+                <!-- Chat Messages Stream -->
+                <div id="chatMessagesContainer" class="p-4 space-y-3.5 bg-[#E5DDD5]/40 min-h-[360px] max-h-[420px] overflow-y-auto flex flex-col">
+                    <!-- Dynamic messages injected via JS -->
+                </div>
+
+                <!-- Chat Input & Media Upload Simulation Bar -->
+                <div class="p-3 bg-white border-t border-slate-200 flex items-center gap-2">
+                    <button onclick="simulateMediaAttachment('pdf')" title="إرفاق عقد PDF أو Word" class="w-9 h-9 rounded-xl bg-slate-100 hover:bg-emerald-50 text-depi-darkGreen flex items-center justify-center transition border border-slate-200">
+                        <i class="fa-solid fa-paperclip"></i>
+                    </button>
+                    <button onclick="simulateMediaAttachment('voice')" title="إرسال رسالة صوتية (Gemini Audio Transcribe)" class="w-9 h-9 rounded-xl bg-slate-100 hover:bg-blue-50 text-depi-blue flex items-center justify-center transition border border-slate-200">
+                        <i class="fa-solid fa-microphone"></i>
+                    </button>
+                    <input id="customChatInput" type="text" placeholder="اكتب رسالة الموكل أو اضغط إرسال لتجربة الرد الذكي..." class="flex-1 bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2 text-xs focus:outline-none focus:border-depi-darkGreen" onkeydown="if(event.key==='Enter') sendCustomChatMessage()">
+                    <button onclick="sendCustomChatMessage()" class="wf-btn bg-depi-darkGreen hover:bg-depi-emerald text-white font-bold text-xs px-4 py-2 rounded-xl shadow transition flex items-center gap-1.5">
+                        <span>إرسال</span>
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Left Column (RTL): Live PostgreSQL Case Record & AI Inspector (5 Cols) -->
+            <div class="lg:col-span-5 space-y-4">
+                
+                <!-- Card A: Client Billing & Free Quota Status (`legal_ai_reserve_question_v2`) -->
+                <div class="wf-box bg-white rounded-2xl shadow-sm border border-slate-200 p-4 relative">
+                    <div class="flex items-center justify-between mb-2.5">
+                        <div class="flex items-center gap-2">
+                            <span class="w-7 h-7 rounded-lg bg-depi-blue/10 text-depi-blue flex items-center justify-center font-bold text-xs">
+                                <i class="fa-solid fa-credit-card"></i>
+                            </span>
+                            <div>
+                                <h4 class="font-extrabold text-xs sm:text-sm text-slate-800">رصيد الاستشارات وحالة الدفع (`legal_ai_clients`)</h4>
+                                <p class="text-[11px] text-slate-500">سؤالان موضوعيان مجاناً • التوضيح (`clarify`) لا يُخصم</p>
+                            </div>
+                        </div>
+                        <span id="billingBadge" class="bg-emerald-100 text-depi-darkGreen font-extrabold text-[11px] px-2.5 py-1 rounded-full">
+                            مسموح (1 / 2 مجاني)
+                        </span>
+                    </div>
+
+                    <!-- Progress bar -->
+                    <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden mb-2">
+                        <div id="quotaProgressBar" class="bg-gradient-to-r from-depi-darkGreen to-depi-emerald h-full transition-all duration-300" style="width: 50%"></div>
+                    </div>
+
+                    <div class="flex items-center justify-between text-[11px] text-slate-600 bg-slate-50 px-3 py-2 rounded-xl border border-slate-200/70">
+                        <span><i class="fa-solid fa-mobile-screen-button text-depi-darkGreen me-1"></i>حساب إنستاباي المعتمد: <strong class="font-mono">01120399998</strong></span>
+                        <span>متابعة: <strong>100 ج.م</strong> | موسعة: <strong>1000 ج.م</strong></span>
+                    </div>
+                </div>
+
+                <!-- Card B: Structured Case Record (`legal_ai_intake_overview` & `caseAnalysis`) -->
+                <div class="wf-box bg-slate-900 text-white rounded-2xl shadow-md border border-slate-800 p-4 space-y-3 relative">
+                    <div class="ux-callout absolute -top-3 left-4 bg-depi-gold text-slate-900 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full shadow">
+                        <span>تحديث تراكمي لنفس الملف بدون نسيان السياق أو إظهار [INTAKE_COMPLETE]</span>
+                    </div>
+
+                    <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-database text-depi-emerald"></i>
+                            <span class="font-extrabold text-xs sm:text-sm">سجل القضية التراكمي (`legal_ai_intake_records`)</span>
+                        </div>
+                        <span id="caseRefBadge" class="font-mono text-xs bg-depi-darkGreen text-white px-2.5 py-0.5 rounded-md font-bold">LC-2026-108</span>
+                    </div>
+
+                    <!-- 4 Key Metadata Pills -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-[11px]">
+                        <div class="bg-slate-800/90 p-2 rounded-lg border border-slate-700">
+                            <span class="text-slate-400 block text-[10px]">Matter_Type</span>
+                            <span id="metaMatterType" class="font-bold text-depi-emerald font-mono">Litigation</span>
+                        </div>
+                        <div class="bg-slate-800/90 p-2 rounded-lg border border-slate-700">
+                            <span class="text-slate-400 block text-[10px]">Category</span>
+                            <span id="metaCategory" class="font-bold text-white">property (عقارات)</span>
+                        </div>
+                        <div class="bg-slate-800/90 p-2 rounded-lg border border-slate-700">
+                            <span class="text-slate-400 block text-[10px]">next_action</span>
+                            <span id="metaNextAction" class="font-bold text-depi-gold font-mono">collect</span>
+                        </div>
+                        <div class="bg-slate-800/90 p-2 rounded-lg border border-slate-700">
+                            <span class="text-slate-400 block text-[10px]">Urgency_Level</span>
+                            <span id="metaUrgency" class="font-bold text-emerald-400 font-mono">Normal</span>
+                        </div>
+                    </div>
+
+                    <!-- Structured Fields Breakdown -->
+                    <div class="space-y-2 text-xs">
+                        <div class="bg-slate-800/60 p-2.5 rounded-xl border border-slate-700/80">
+                            <div class="text-depi-gold font-bold text-[11px] mb-1 flex items-center justify-between">
+                                <span><i class="fa-solid fa-file-lines me-1"></i>ملخص الوقائع التراكمي (Summary & Key_Facts):</span>
+                                <span id="metaTaskType" class="text-[10px] font-mono bg-slate-700 px-2 py-0.5 rounded text-slate-200">task: question</span>
+                            </div>
+                            <p id="metaSummary" class="text-slate-200 text-[11px] leading-relaxed" contenteditable="true">
+                                الموكل هو المالك في عقد إيجار قديم. المستأجر الأصلي فلسطيني الجنسية وهاجر خارج مصر عام 2020. يجري التحقق مما إذا كان قد عاد للإقامة بالعين أو تركها لأقارب.
+                            </p>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            <div class="bg-slate-800/60 p-2.5 rounded-xl border border-slate-700/80">
+                                <span class="text-emerald-400 font-bold text-[11px] block mb-1">
+                                    <i class="fa-solid fa-users me-1"></i>الأطراف والتواريخ (`parties` / `timeline`):
+                                </span>
+                                <ul id="metaPartiesList" class="text-[11px] text-slate-300 space-y-1 list-disc list-inside">
+                                    <li>العميل: المؤجر / المالك</li>
+                                    <li>الخصم: مستأجر (فلسطيني)</li>
+                                    <li>2020: واقعة السفر والهجرة</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-slate-800/60 p-2.5 rounded-xl border border-slate-700/80">
+                                <span class="text-amber-400 font-bold text-[11px] block mb-1">
+                                    <i class="fa-solid fa-circle-exclamation me-1"></i>النواقص والغير معلوم (`Missing` / `Unavailable`):
+                                </span>
+                                <ul id="metaMissingList" class="text-[11px] text-slate-300 space-y-1 list-disc list-inside">
+                                    <li>غير معلوم للعميل: موقف الإقامة الرسمية (سُجل في unavailable_information ولن يُسأل عنه مجدداً)</li>
+                                    <li>مطلوب: تاريخ عقد الإيجار الأصلي</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================================================= -->
+        <!-- VIEW 2: CONTRACT REVIEW STUDIO (BILINGUAL AR/EN PDF) & DEADLINE CALCULATOR                -->
+        <!-- ========================================================================================= -->
+        <section id="view-contracts" class="view-section hidden space-y-5">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+                
+                <!-- Right/Main Column: Contract Review Specialist Output (8 Cols) -->
+                <div class="lg:col-span-8 wf-box bg-white rounded-2xl shadow-sm border border-slate-200 p-5 space-y-4 relative">
+                    
+                    <div class="ux-callout absolute -top-3 left-6 bg-depi-gold text-slate-900 text-[11px] font-extrabold px-3 py-1 rounded-full shadow-md">
+                        <span>UX: لا يفترض أن العميل موزع تلقائياً • يقتبس النص الأصلي حرفياً مع تفسير عربي وصياغة بديلة باللغتين</span>
+                    </div>
+
+                    <!-- Top Header & Client Role Selector -->
+                    <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+                        <div>
+                            <h3 class="font-extrabold text-base text-slate-800">جدول التذاكر والإحالات البشرية (`legal_ai_admin_tickets`)</h3>
+                            <p class="text-xs text-slate-500">جرب الضغط على أزرار أوامر الإدارة لمحاكاة تنفيذ دالة `legal_ai_admin_command` في قاعدة البيانات</p>
+                        </div>
+                        <span id="adminCommandToast" class="bg-slate-900 text-depi-gold text-xs font-bold px-3 py-1.5 rounded-xl">
+                            جاهز لتلقي أوامر الإدارة (`دفع`، `رفض`، `رد`، `ملف`، `عودة`)
+                        </span>
+                    </div>
+
+                    <!-- Tickets List -->
+                    <div class="space-y-3">
+                        <!-- Ticket #18 (Receipt Verification) -->
+                        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/70 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                            <div class="space-y-1">
+                                <div class="flex items-center gap-2 flex-wrap">
+                                    <span class="bg-depi-blue text-white text-[11px] font-bold px-2 py-0.5 rounded font-mono">Ticket #18</span>
+                                    <span class="bg-blue-100 text-depi-blue text-[11px] font-extrabold px-2.5 py-0.5 rounded-full">إيصال إنستاباي للتحقق (`receipt`)</span>
+                                    <span class="text-xs font-bold text-slate-700 font-mono">LC-2026-104 • WhatsApp</span>
+                                </div>
+                                <p class="text-xs text-slate-600" contenteditable="true">
+                                    أرسل العميل صورة تحويل إنستاباي بمبلغ 100 ج.م لاستكمال استشارة عقد العمل بعد استنفاد السؤالين المجانيين.
+                                </p>
+                            </div>
+                            <div class="flex items-center gap-1.5 shrink-0 flex-wrap">
+                                <button onclick="executeLawyerCmd('دفع 18', 'تم اعتماد الدفع للطلب #18 وتفعيل المتابعة المدفوعة تلقائياً واستئناف طلب العميل المحفوظ!')" class="wf-btn bg-depi-darkGreen hover:bg-depi-emerald text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm">
+                                    <i class="fa-solid fa-check me-1"></i>دفع 18
+                                </button>
+                                <button onclick="executeLawyerCmd('رفض 18', 'تم رفض إيصال الدفع للطلب #18 وإبلاغ العميل بالتواصل لتوضيح بيانات التحويل.')" class="bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg">
+                                    رفض 18
+                                </button>
+                                <button onclick="executeLawyerCmd('ملف 18', 'تم إرسال الملف التفصيلي للقضية lawyer-case-18.txt والمرفقات الأصلية إلى قناة الإدارة.')" class="bg-slate-200 hover:bg-slate-300 text-slate-800 text-xs font-bold px-2.5 py-1.5 rounded-lg">
+                                    ملف 18
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Ticket #19 (Urgent Human Handoff) -->
+                        <div class="p-4 rounded-xl border-2 border-amber-300 bg-amber-50/40 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                            <div class="space-y-1">
+                                <div class="flex items-center gap-2 flex-wrap">
+                                    <span class="bg-amber-500 text-slate-900 text-[11px] font-extrabold px-2 py-0.5 rounded font-mono">Ticket #19</span>
+                                    <span class="bg-rose-100 text-rose-800 text-[11px] font-extrabold px-2.5 py-0.5 rounded-full">تدخل بشري عاجل (`urgent_review`)</span>
+                                    <span class="text-xs font-bold text-slate-700 font-mono">LC-2026-109 • Telegram</span>
+                                </div>
+                                <p class="text-xs text-slate-700" contenteditable="true">
+                                    السبب: قرار إداري بغلق منشأة وميعاد التظلم قارب على الانتهاء. المساعد يجمع الوقائع فقط (`factualOnly=true`) لحين رد المستشار القانوني المختص.
+                                </p>
+                            </div>
+                            <div class="flex items-center gap-1.5 shrink-0 flex-wrap">
+                                <button onclick="executeLawyerCmd('رد 19', 'تم إرسال رد المستشار القانوني مباشرة إلى تليجرام العميل مع إبقاء المحادثة تحت الإشراف البشري.')" class="wf-btn bg-depi-blue hover:bg-blue-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm">
+                                    <i class="fa-solid fa-reply me-1"></i>رد مباشر 19
+                                </button>
+                                <button onclick="executeLawyerCmd('عودة 19', 'تم إغلاق التذكرة #19 وإعادة تفعيل مساعد النظام القانوني الموحد للرد الآلي على العميل.')" class="bg-depi-emerald hover:bg-depi-darkGreen text-white text-xs font-bold px-3 py-1.5 rounded-lg">
+                                    عودة للمساعد 19
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 12-Hour Official Egyptian Gazette & Sources Monitor (4 Cols) -->
+                <div class="lg:col-span-4 wf-box bg-slate-900 text-white rounded-2xl shadow-md p-5 space-y-3.5">
+                    <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-landmark text-depi-gold"></i>
+                            <div>
+                                <h3 class="font-extrabold text-sm">راصد التشريعات المصرية الرسمية</h3>
+                                <p class="text-[10px] text-slate-400">يقبل فقط `.gov.eg` و`alamiria.com` بدليل حرفي</p>
+                            </div>
+                        </div>
+                        <span class="bg-depi-darkGreen text-emerald-200 text-[10px] font-mono px-2 py-0.5 rounded">CRON: 0 8,20 * * *</span>
+                    </div>
+
+                    <div class="space-y-2 text-xs max-h-[290px] overflow-y-auto pe-1">
+                        <div class="p-2.5 rounded-xl bg-slate-800/90 border border-slate-700 flex items-center justify-between">
+                            <div>
+                                <div class="font-bold text-white">الجريدة الرسمية والوقائع المصرية</div>
+                                <div class="text-[10px] text-slate-400 font-mono">alamiria.com • scope: gazette</div>
+                            </div>
+                            <span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full font-bold">محدث ✓</span>
+                        </div>
+
+                        <div class="p-2.5 rounded-xl bg-slate-800/90 border border-slate-700 flex items-center justify-between">
+                            <div>
+                                <div class="font-bold text-white">محكمة النقض المصرية</div>
+                                <div class="text-[10px] text-slate-400 font-mono">cc.gov.eg • scope: civil/criminal</div>
+                            </div>
+                            <span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full font-bold">محدث ✓</span>
+                        </div>
+
+                        <div class="p-2.5 rounded-xl bg-slate-800/90 border border-slate-700 flex items-center justify-between">
+                            <div>
+                                <div class="font-bold text-white">وزارة العدل والشهر العقاري</div>
+                                <div class="text-[10px] text-slate-400 font-mono">moj.gov.eg • scope: property</div>
+                            </div>
+                            <span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full font-bold">محدث ✓</span>
+                        </div>
+
+                        <div class="p-2.5 rounded-xl bg-slate-800/90 border border-slate-700 flex items-center justify-between">
+                            <div>
+                                <div class="font-bold text-white">مصلحة الضرائب والعمل والتأمينات</div>
+                                <div class="text-[10px] text-slate-400 font-mono">eta.gov.eg • labour.gov.eg • nosi.gov.eg</div>
+                            </div>
+                            <span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full font-bold">محدث ✓</span>
+                        </div>
+
+                        <div class="p-2.5 rounded-xl bg-slate-800/90 border border-slate-700 flex items-center justify-between">
+                            <div>
+                                <div class="font-bold text-white">الرقابة المالية والاستثمار والبنك المركزي</div>
+                                <div class="text-[10px] text-slate-400 font-mono">fra.gov.eg • gafi.gov.eg • cbe.org.eg</div>
+                            </div>
+                            <span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full font-bold">محدث ✓</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================================================= -->
+        <!-- VIEW 4: DEPI SLIDE 3 PRESENTATION MODE (3-COLUMN WIREFRAME SHOWCASE)                      -->
+        <!-- ========================================================================================= -->
+        <section id="view-slide3" class="view-section hidden space-y-5">
+            <div class="bg-white rounded-2xl shadow-md border-2 border-depi-darkGreen p-5 space-y-5">
+                
+                <!-- Slide Header Banner -->
+                <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 pb-3">
+                    <div>
+                        <span class="text-[11px] font-black uppercase tracking-wider text-depi-darkGreen bg-emerald-100 px-2.5 py-0.5 rounded">DEPI Presentation Ready • Slide 03</span>
+                        <h2 class="text-lg sm:text-xl font-black text-slate-900 mt-1" contenteditable="true">
+                            Project Wireframe & User Journey — النظام القانوني الموحد (Unified Legal System)
+                        </h2>
+                    </div>
+                    <div class="text-xs text-slate-500">
+                        نصيحة للعرض: اضغط على زر <strong>وضع التخطيط الهيكلي (Wireframe)</strong> بالأعلى لأخذ لقطة شاشة تخطيطية ثانية!
+                    </div>
+                </div>
+
+                <!-- 3-Column Layout Matching the Uploaded Reference Image -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
+                    
+                    <!-- COLUMN 1: Client Intake & Portal Wireframe (4 Cols) -->
+                    <div class="lg:col-span-4 wf-box bg-slate-50 rounded-2xl border-2 border-slate-300 p-4 flex flex-col justify-between space-y-3">
+                        <div class="space-y-3">
+                            <div class="text-center border-b border-slate-200 pb-2">
+                                <h3 class="font-extrabold text-sm text-slate-800">1. Homepage & Intake Wireframe</h3>
+                                <p class="text-[11px] text-slate-500">واجهة الاستقبال الموحد (WhatsApp / Telegram / Web)</p>
+                            </div>
+
+                            <!-- Mini Top Bar -->
+                            <div class="bg-white p-2.5 rounded-xl border border-slate-200 flex items-center justify-between">
+                                <div class="flex items-center gap-1.5">
+                                    <span class="w-5 h-5 rounded bg-depi-darkGreen text-white flex items-center justify-center text-[10px] font-bold">U</span>
+                                    <span class="text-[11px] font-bold">النظام القانوني الموحد</span>
+                                </div>
+                                <span class="bg-depi-darkGreen text-white text-[10px] px-2 py-0.5 rounded font-bold">2 سؤال مجاناً</span>
+                            </div>
+
+                            <!-- Mini Chat & Upload Box -->
+                            <div class="bg-white p-3 rounded-xl border border-slate-200 space-y-2">
+                                <div class="bg-emerald-50 text-slate-800 p-2 rounded-lg text-[11px] border border-emerald-200">
+                                    <strong>مساعد النظام القانوني الموحد:</strong> أهلاً بحضرتك. احكيلي إيه اللي محتاج مساعدة فيه، أو ارفع العقد/المستند؟
+                                </div>
+                                <div class="bg-slate-100 text-slate-700 p-2 rounded-lg text-[11px] ms-6">
+                                    <strong>العميل:</strong> عندي عقد توزيع بالإنجليزي عايز أراجعه وأعرف المخاطر.
+                                </div>
+                                <div class="border-2 border-dashed border-depi-blue/50 bg-blue-50/40 rounded-lg p-2.5 text-center text-[11px] text-depi-blue font-bold">
+                                    <i class="fa-solid fa-file-arrow-up me-1"></i> مرفق: PDF / Word / صورة / تسجيل صوتي
+                                </div>
+                                <div class="bg-emerald-50 text-slate-800 p-2 rounded-lg text-[11px] border border-emerald-200">
+                                    <strong>مساعد النظام (سؤال واحد):</strong> تمام، وصل العقد. حضرتك بتمثل الطرف الأول (المورد) ولا الطرف الثاني (الموزع)؟
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mini Features Grid -->
+                        <div class="grid grid-cols-3 gap-2 pt-2">
+                            <div class="bg-white p-2 rounded-lg border border-slate-200 text-center">
+                                <i class="fa-solid fa-file-shield text-depi-darkGreen text-xs"></i>
+                                <div class="text-[10px] font-bold mt-1">مراجعة عقود</div>
+                            </div>
+                            <div class="bg-white p-2 rounded-lg border border-slate-200 text-center">
+                                <i class="fa-solid fa-clock text-depi-blue text-xs"></i>
+                                <div class="text-[10px] font-bold mt-1">حساب مواعيد</div>
+                            </div>
+                            <div class="bg-white p-2 rounded-lg border border-slate-200 text-center">
+                                <i class="fa-solid fa-scale-unbalanced text-depi-gold text-xs"></i>
+                                <div class="text-[10px] font-bold mt-1">تقرير IRAC</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- COLUMN 2: Center User Flow Diagram (Onboarding to Core Features) (4 Cols) -->
+                    <div class="lg:col-span-4 wf-box bg-white rounded-2xl border-2 border-depi-blue/40 p-4 flex flex-col justify-between">
+                        <div class="text-center border-b border-slate-200 pb-2">
+                            <h3 class="font-extrabold text-sm text-slate-800">2. User Flow Diagram</h3>
+                            <p class="text-[11px] text-slate-500">Onboarding to Core Features (n8n Pipeline)</p>
+                        </div>
+
+                        <!-- Vertical Flowchart with Connectors -->
+                        <div class="my-auto py-2 flex flex-col items-center space-y-1.5 text-xs">
+                            <!-- Node 1 -->
+                            <div class="w-full bg-slate-900 text-white px-3 py-2 rounded-xl font-bold text-center shadow-sm flex items-center justify-between">
+                                <span class="text-[11px]"><i class="fa-solid fa-comment-dots text-depi-emerald me-1"></i>1. دخول الموكل (WhatsApp / Telegram)</span>
+                                <span class="text-[10px] font-mono text-emerald-300">Fast Reply</span>
+                            </div>
+                            <i class="fa-solid fa-arrow-down text-depi-darkGreen text-xs"></i>
+
+                            <!-- Node 2 -->
+                            <div class="w-full bg-emerald-50 border-2 border-depi-darkGreen text-slate-800 px-3 py-2 rounded-xl font-bold text-center">
+                                <div class="text-[11px]">2. قراءة المرفقات + حوار سؤال واحد</div>
+                                <div class="text-[10px] text-slate-500 font-normal">Gemini 2.5 OCR/Audio • Postgres Case `LC-2026`</div>
+                            </div>
+                            <i class="fa-solid fa-arrow-down text-depi-darkGreen text-xs"></i>
+
+                            <!-- Node 3 (Branching) -->
+                            <div class="w-full bg-blue-50 border-2 border-depi-blue text-slate-800 px-3 py-2 rounded-xl font-bold text-center">
+                                <div class="text-[11px]">3. فحص الرصيد المجاني (2 سؤال) والخطورة</div>
+                                <div class="text-[10px] text-depi-blue font-normal">التوضيح مجاني • المستعجل يصعّد للمحامي فوراً</div>
+                            </div>
+                            <i class="fa-solid fa-arrow-down text-depi-blue text-xs"></i>
+
+                            <!-- Node 4 (Grounded Research) -->
+                            <div class="w-full bg-amber-50 border-2 border-depi-gold text-slate-900 px-3 py-2 rounded-xl font-bold text-center">
+                                <div class="text-[11px]">4. بحث التشريعات الرسمية `.gov.eg`</div>
+                                <div class="text-[10px] text-amber-800 font-normal">النقض • الوقائع المصرية • العدل • الضرائب • العمل</div>
+                            </div>
+                            <i class="fa-solid fa-arrow-down text-amber-600 text-xs"></i>
+
+                            <!-- Node 5 (Final Output Split) -->
+                            <div class="grid grid-cols-2 gap-2 w-full pt-1">
+                                <div class="bg-depi-darkGreen text-white p-2 rounded-xl text-center font-bold text-[10px]">
+                                    <i class="fa-solid fa-file-pdf block mb-0.5 text-depi-gold"></i>
+                                    تقرير عقود مزدوج (AR/EN) أو رد مسند
+                                </div>
+                                <div class="bg-depi-blue text-white p-2 rounded-xl text-center font-bold text-[10px]">
+                                    <i class="fa-brands fa-whatsapp block mb-0.5 text-emerald-300"></i>
+                                    تذكرة للمحامي + ملف `dossier.txt`
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-center text-[10px] text-slate-500 border-t border-slate-100 pt-2">
+                            يدعم الاستئناف التلقائي بعد اعتماد المحامي للدفع (`pay #`)
+                        </div>
+                    </div>
+
+                    <!-- COLUMN 3: Lawyer Main Dashboard Wireframe (4 Cols) -->
+                    <div class="lg:col-span-4 wf-box bg-slate-50 rounded-2xl border-2 border-slate-300 p-4 flex flex-col justify-between space-y-3">
+                        <div class="space-y-3">
+                            <div class="text-center border-b border-slate-200 pb-2">
+                                <h3 class="font-extrabold text-sm text-slate-800">3. Main Dashboard Wireframe</h3>
+                                <p class="text-[11px] text-slate-500">لوحة التحكم المركزية (`legal_ai_intake_overview`)</p>
+                            </div>
+
+                            <!-- Mini Dashboard Layout with Dark Green Sidebar -->
+                            <div class="grid grid-cols-12 gap-2 bg-white p-2.5 rounded-xl border border-slate-200">
+                                <!-- Mini Sidebar -->
+                                <div class="col-span-4 bg-depi-darkGreen text-white rounded-lg p-2 space-y-2 text-[10px]">
+                                    <div class="font-extrabold border-b border-white/20 pb-1">النظام الموحد</div>
+                                    <div class="bg-white/20 px-1.5 py-1 rounded font-bold">• القضايا النشطة</div>
+                                    <div class="opacity-80 px-1.5">• تذاكر المراجعة</div>
+                                    <div class="opacity-80 px-1.5">• إيصالات الدفع</div>
+                                    <div class="opacity-80 px-1.5">• راصد التشريعات</div>
+                                </div>
+
+                                <!-- Mini Main Content -->
+                                <div class="col-span-8 space-y-2">
+                                    <!-- 3 Mini KPIs -->
+                                    <div class="grid grid-cols-3 gap-1.5 text-center">
+                                        <div class="p-1.5 rounded bg-emerald-50 border border-emerald-200">
+                                            <div class="text-xs font-black text-depi-darkGreen">148</div>
+                                            <div class="text-[9px] text-slate-500">قضية</div>
+                                        </div>
+                                        <div class="p-1.5 rounded bg-blue-50 border border-blue-200">
+                                            <div class="text-xs font-black text-depi-blue">9/9</div>
+                                            <div class="text-[9px] text-slate-500">جهات .gov.eg</div>
+                                        </div>
+                                        <div class="p-1.5 rounded bg-amber-50 border border-amber-200">
+                                            <div class="text-xs font-black text-amber-700">98%</div>
+                                            <div class="text-[9px] text-slate-500">دقة الإسناد</div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Mini Chart Representation -->
+                                    <div class="p-2 rounded border border-slate-200 bg-slate-50">
+                                        <div class="text-[9px] font-bold text-slate-600 mb-1">توزيع التخصصات (مدني • عقود • عمل • أسرة)</div>
+                                        <div class="flex items-end gap-1.5 h-14 pt-2 px-1">
+                                            <div class="flex-1 bg-depi-darkGreen h-full rounded-t"></div>
+                                            <div class="flex-1 bg-depi-emerald h-4/5 rounded-t"></div>
+                                            <div class="flex-1 bg-depi-blue h-3/5 rounded-t"></div>
+                                            <div class="flex-1 bg-depi-gold h-2/5 rounded-t"></div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Mini Lawyer Action Row -->
+                                    <div class="p-1.5 rounded bg-slate-900 text-white text-[9px] flex items-center justify-between">
+                                        <span>أمر واتساب: `دفع 18` | `رد 19`</span>
+                                        <span class="text-depi-gold font-bold">متصل ✓</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-emerald-50 border border-emerald-200 p-2.5 rounded-xl text-[11px] text-depi-darkGreen font-semibold">
+                            <i class="fa-solid fa-check-circle me-1"></i> يجمع بين سهولة المحادثة للموكل والرقابة الصارمة للمحامي.
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ================= BILINGUAL PDF REPORT PREVIEW MODAL (AR / EN) ================= -->
+    <div id="pdfModal" class="fixed inset-0 bg-slate-950/75 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden border border-slate-300">
+            <!-- Modal Top Bar -->
+            <div class="bg-slate-900 text-white px-5 py-3.5 flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                    <i class="fa-solid fa-file-pdf text-rose-400 text-lg"></i>
+                    <div>
+                        <h3 class="font-extrabold text-sm">Contract_Review_Report_LC-2026-108_AR_EN.pdf</h3>
+                        <p class="text-[11px] text-slate-400">تقرير مراجعة العقد المنظم بالنسختين العربية والإنجليزية • جاهز للطباعة والإرسال</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="window.print()" class="bg-depi-emerald hover:bg-depi-darkGreen text-white text-xs font-bold px-3.5 py-1.5 rounded-lg flex items-center gap-1.5 transition">
+                        <i class="fa-solid fa-print"></i> طباعة / حفظ PDF
+                    </button>
+                    <button onclick="closePdfModal()" class="bg-white/10 hover:bg-white/20 text-white w-8 h-8 rounded-lg flex items-center justify-center">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Printable Document Body -->
+            <div class="p-6 overflow-y-auto space-y-6 bg-slate-100">
+                
+                <!-- Page 1: Arabic Legal Version (RTL) -->
+                <div dir="rtl" class="bg-white p-6 rounded-xl shadow border border-slate-200 space-y-4">
+                    <div class="flex items-center justify-between border-b-2 border-depi-darkGreen pb-3">
+                        <div>
+                            <h2 class="text-lg font-black text-depi-darkGreen">النظام القانوني الموحد — وحدة مراجعة العقود والشركات</h2>
+                            <p class="text-xs text-slate-600">القسم الأول: النسخة العربية لمراجعة مخاطر عقد التوزيع التجاري • ملف رقم: LC-2026-108</p>
+                        </div>
+                        <span class="bg-emerald-50 text-depi-darkGreen border border-emerald-300 text-xs font-bold px-3 py-1 rounded-lg">صفة العميل: الموزع (الطرف الثاني)</span>
+                    </div>
+
+                    <div class="space-y-3 text-xs">
+                        <div class="p-3.5 rounded-lg border border-slate-200 bg-slate-50 space-y-1.5">
+                            <div class="font-extrabold text-rose-700">الخطر الأول (Risk 1) — البند 14.2: المسؤولية غير المحدودة</div>
+                            <div><strong>النص الأصلي:</strong> "The Distributor shall indemnify and hold the Supplier harmless against any and all direct, indirect, or consequential losses..."</div>
+                            <div><strong>وجه الخطورة على الموزع:</strong> يفرض التزاماً مفتوحاً بالتعويض عن الأضرار غير المباشرة وتفويت الربح دون سقف مالي.</div>
+                            <div class="text-depi-darkGreen font-bold"><strong>الصياغة البديلة المقترحة (عربي):</strong> "لا يسأل أي من الطرفين عن الأضرار غير المباشرة أو التبعية، ولا يتجاوز الحد الأقصى لمسؤولية الموزع إجمالي قيمة المسحوبات خلال الـ 12 شهراً السابقة."</div>
+                        </div>
+
+                        <div class="p-3.5 rounded-lg border border-slate-200 bg-slate-50 space-y-1.5">
+                            <div class="font-extrabold text-amber-700">الخطر الثاني (Risk 2) — البند 8.1: الإنهاء المنفرد ومصير المخزون</div>
+                            <div><strong>وجه الخطورة على الموزع:</strong> إجازة الإنهاء بإخطار 15 يوماً فقط دون التزام المورد باسترداد البضائع المتبقية في مخازن الموزع.</div>
+                            <div class="text-depi-darkGreen font-bold"><strong>الصياغة البديلة المقترحة (عربي):</strong> "يكون الإنهاء بإخطار كتابي مسبق لا يقل عن 90 يوماً، مع التزام المورد بإعادة شراء المخزون السليم المتبقي لدى الموزع بسعر التكلفة."</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 2: English Legal Version (LTR) -->
+                <div dir="ltr" class="bg-white p-6 rounded-xl shadow border border-slate-200 space-y-4 font-inter">
+                    <div class="flex items-center justify-between border-b-2 border-depi-blue pb-3">
+                        <div>
+                            <h2 class="text-lg font-extrabold text-depi-blue">Unified Legal System — AI Contract Review Division</h2>
+                            <p class="text-xs text-slate-600">Section 2: Complete English Version • Case Ref: LC-2026-108</p>
+                        </div>
+                        <span class="bg-blue-50 text-depi-blue border border-blue-200 text-xs font-bold px-3 py-1 rounded-lg">Client Role: Distributor (Second Party)</span>
+                    </div>
+
+                    <div class="space-y-3 text-xs">
+                        <div class="p-3.5 rounded-lg border border-slate-200 bg-slate-50 space-y-1.5">
+                            <div class="font-bold text-rose-700">RISK 1 — Clause 14.2: Unlimited Indemnity & Consequential Damages</div>
+                            <div><strong>Clause Quote:</strong> "Clause 14.2: The Distributor shall indemnify and hold the Supplier harmless against any and all direct, indirect, or consequential losses without any financial cap."</div>
+                            <div><strong>Legal & Commercial Risk:</strong> Exposes the Distributor to uncapped financial liability for indirect losses beyond reasonable control.</div>
+                            <div class="text-depi-darkGreen font-semibold"><strong>Proposed Revised Clause:</strong> "Clause 14.2: Neither Party shall be liable for indirect or consequential damages. Total aggregate liability of the Distributor shall not exceed 100% of fees paid in the preceding 12 months."</div>
+                        </div>
+
+                        <div class="p-3.5 rounded-lg border border-slate-200 bg-slate-50 space-y-1.5">
+                            <div class="font-bold text-amber-700">RISK 2 — Clause 8.1: Short Notice Termination & Unsold Inventory</div>
+                            <div><strong>Clause Quote:</strong> "Clause 8.1: Supplier may terminate this Agreement at any time upon 15 days written notice without obligation to repurchase remaining inventory."</div>
+                            <div><strong>Legal & Commercial Risk:</strong> Leaves the Distributor with stranded stock and sunk marketing costs upon sudden termination.</div>
+                            <div class="text-depi-darkGreen font-semibold"><strong>Proposed Revised Clause:</strong> "Clause 8.1: Either Party may terminate upon 90 days prior written notice. Upon termination without Distributor fault, Supplier shall repurchase unsold inventory at landed cost."</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= JAVASCRIPT LOGIC ================= -->
+    <script>
+        let wireframeActive = false;
+        let uxCalloutsActive = true;
+        let currentLang = 'ar';
+
+        // Scenario Data derived directly from the n8n JSON prompts & workflow logic
+        const scenarios = {
+            rent: {
+                caseRef: 'LC-2026-108',
+                matterType: 'Litigation',
+                category: 'property (عقارات)',
+                nextAction: 'collect',
+                urgency: 'Normal',
+                taskType: 'task: question',
+                billingText: 'مسموح (1 / 2 مجاني)',
+                quotaWidth: '50%',
+                summary: 'العميل هو المالك في عقد إيجار قديم. المستأجر الأصلي فلسطيني الجنسية وهاجر خارج مصر عام 2020. يجري التحقق مما إذا كان قد عاد للإقامة بالعين أو تركها لأقارب.',
+                parties: ['العميل: المؤجر / المالك', 'الخصم: مستأجر (فلسطيني)', '2020: واقعة السفر والهجرة'],
+                missing: ['غير معلوم للعميل: موقف الإقامة الرسمية (سُجل في unavailable_information)', 'مطلوب: هل عاد للعين ومتى؟'],
+                messages: [
+                    { sender: 'client', text: 'السلام عليكم، عندي دعوى إيجار قديم وعايز أعرف موقفي القانوني.' },
+                    { sender: 'bot', text: 'وعليكم السلام، أهلاً بحضرتك في النظام القانوني الموحد. حضرتك المالك ولا المستأجر، والدعوى لسه هتترفع ولا منظورة بالفعل؟', badge: 'Fast First Reply + Single Question' },
+                    { sender: 'client', text: 'أنا المالك، لسه هرفعها. المستأجر فلسطيني ومش عارف موقف إقامته إيه بس هو هاجر سنة 2020.' },
+                    { sender: 'bot', text: 'تمام، سجلت عندي إنه سافر سنة 2020 وموقف الإقامة الرسمية غير معلوم حالياً. هل المستأجر رجع أقام في الشقة بعد 2020 ولا الشقة مغلقة أو مقيم فيها حد تاني؟', badge: 'تحديث تراكمي بدون تكرار سؤال الإقامة' }
+                ]
+            },
+            contract: {
+                caseRef: 'LC-2026-112',
+                matterType: 'Contract',
+                category: 'commercial (تجاري)',
+                nextAction: 'research',
+                urgency: 'Normal',
+                taskType: 'task: contract_review',
+                billingText: 'مسموح (2 / 2 مجاني)',
+                quotaWidth: '100%',
+                summary: 'طلب مراجعة عقد توزيع تجاري دولي مرفوع بصيغة PDF ثنائي اللغة. العميل يمثل الطرف الثاني (الموزع). تم رصد مخاطر في البند 14.2 (المسؤولية غير المحدودة) والبند 8.1 (الإنهاء المنفرد).',
+                parties: ['العميل: الموزع (الطرف الثاني)', 'المورد: شركة أجنبية (الطرف الأول)'],
+                missing: ['مكتمل: تم قراءة 14 صفحة عبر Gemini 2.5 Flash وتوليد التقرير المزدوج'],
+                messages: [
+                    { sender: 'client', text: 'مرفق عقد توزيع Exclusive_Distribution_2026.pdf، محتاج مراجعة البنود الخطيرة وصياغة بديلة.' },
+                    { sender: 'bot', text: 'وصل ملف العقد وتم قراءته بالكامل (14 صفحة). قبل إصدار التقرير، حضرتك في العقد ده بتمثل الطرف الأول (المورد) ولا الطرف الثاني (الموزع)، ولا تحب مراجعة محايدة للطرفين؟', badge: 'Contract Context Check (لا يُخصم كسؤال)' },
+                    { sender: 'client', text: 'أنا الطرف الثاني (الموزع).' },
+                    { sender: 'bot', text: 'تم فحص العقد من منظور الموزع وإعداد التقرير المفصل بالنسختين العربية والإنجليزية متضمناً اقتباس البنود الخطرة والصياغة البديلة المقترحة. اضغط على تبويب "مراجعة العقود والمواعيد" أو زر معاينة الـ PDF بالأعلى.', badge: 'Report Attachment Ready' }
+                ]
+            },
+            deadline: {
+                caseRef: 'LC-2026-115',
+                matterType: 'Litigation',
+                category: 'civil (مدني)',
+                nextAction: 'research',
+                urgency: 'Normal',
+                taskType: 'task: deadline',
+                billingText: 'متابعة مدفوعة مفعّلة ✓',
+                quotaWidth: '100%',
+                summary: 'حساب ميعاد استئناف حكم مدني حضوري صدر بتاريخ 2026-10-01. المدة الموثقة 40 يوماً مع استبعاد يوم صدور الحكم وفحص تقويم العطلات الرسمية.',
+                parties: ['العميل: المحكوم ضده (مستأنف)', 'تاريخ الحكم: 2026-10-01'],
+                missing: ['تم التحقق من عدم وجود ميعاد مسافة أو سبب وقف/انقطاع'],
+                messages: [
+                    { sender: 'client', text: 'صدر ضدي حكم مدني حضوري يوم 1 أكتوبر 2026، آخر يوم للاستئناف إمتى بالظبط؟' },
+                    { sender: 'bot', text: 'تم التحقق من المادة 227 مرافعات عبر المصادر الرسمية: ميعاد الاستئناف 40 يوماً تقويمياً مع استبعاد يوم صدور الحكم (يبدأ الحساب 2026-10-02). آخر يوم للميعاد هو 2026-11-10، وأرفقت لك تقرير الحساب والتذكيرات المقترحة.', badge: 'Deadline Specialist Verified' }
+                ]
+            },
+            receipt: {
+                caseRef: 'LC-2026-104',
+                matterType: 'Employment',
+                category: 'labor (عمال)',
+                nextAction: 'wait',
+                urgency: 'Normal',
+                taskType: 'task: service (receipt)',
+                billingText: 'بانتظار اعتماد الإدارة (Ticket #18)',
+                quotaWidth: '100%',
+                summary: 'استنفد العميل السؤالين المجانيين وأرسل صورة إيصال إنستاباي بمبلغ 100 ج.م على رقم 01120399998. تم فتح التذكرة #18 للمراجعة ولا يتم فتح الخدمة تلقائياً بمجرد الصورة.',
+                parties: ['العميل: عامل (فصل تعسفي)', 'التحويل: 100 ج.م إنستاباي'],
+                missing: ['بانتظار أمر "دفع 18" من لوحة التحكم أو واتساب الإدارة'],
+                messages: [
+                    { sender: 'client', text: 'حولت الـ 100 جنيه على إنستاباي ودي صورة الإيصال عشان نكمل موضوع الفصل التعسفي.' },
+                    { sender: 'bot', text: 'استقبلنا محتوى الإيصال، لكن اعتماد الدفع يتم بعد مراجعة الإدارة المختصة والتحقق من التحويل (طلب رقم #18). إرسال الصورة وحده لا يفتح المتابعة المدفوعة، وبمجرد الاعتماد هنستكمل طلبك المحفوظ فوراً.', badge: 'Anti-Spoofing Receipt Guard' }
+                ]
+            }
+        };
+
+        // Switch between the 4 Main Views
+        function switchMainView(viewKey) {
+            const views = ['intake', 'contracts', 'lawyer', 'slide3'];
+            views.forEach(k => {
+                const section = document.getElementById('view-' + k);
+                const tab = document.getElementById('navTab-' + k);
+                const jCard = document.getElementById('journeyCard-' + k);
+
+                if (k === viewKey) {
+                    section.classList.remove('hidden');
+                    tab.classList.add('bg-depi-emerald', 'text-white', 'shadow');
+                    tab.classList.remove('text-slate-300');
+                    if (jCard) {
+                        jCard.classList.add('border-depi-darkGreen', 'bg-emerald-50/60');
+                        jCard.classList.remove('border-slate-200', 'bg-white');
+                    }
+                } else {
+                    section.classList.add('hidden');
+                    tab.classList.remove('bg-depi-emerald', 'text-white', 'shadow');
+                    tab.classList.add('text-slate-300');
+                    if (jCard) {
+                        jCard.classList.remove('border-depi-darkGreen', 'bg-emerald-50/60');
+                        jCard.classList.add('border-slate-200', 'bg-white');
+                    }
+                }
+            });
+        }
+
+        // Load a preset scenario into the Intake Chat & Postgres Inspector
+        function loadScenario(key) {
+            const data = scenarios[key];
+            if (!data) return;
+
+            // Update Scenario Buttons styling
+            ['rent', 'contract', 'deadline', 'receipt'].forEach(k => {
+                const btn = document.getElementById('scenBtn-' + k);
+                if (k === key) {
+                    btn.className = 'scen-btn shrink-0 bg-depi-darkGreen text-white text-[11px] font-bold px-3 py-1 rounded-lg shadow-sm transition';
+                } else {
+                    btn.className = 'scen-btn shrink-0 bg-white hover:bg-emerald-50 text-slate-700 border border-slate-300 text-[11px] font-bold px-3 py-1 rounded-lg transition';
+                }
+            });
+
+            // Render chat messages
+            const container = document.getElementById('chatMessagesContainer');
+            container.innerHTML = '';
+            data.messages.forEach(m => {
+                appendMessageBubble(m.sender, m.text, m.badge);
+            });
+
+            // Update Postgres Case Inspector
+            document.getElementById('caseRefBadge').textContent = data.caseRef;
+            document.getElementById('metaMatterType').textContent = data.matterType;
+            document.getElementById('metaCategory').textContent = data.category;
+            document.getElementById('metaNextAction').textContent = data.nextAction;
+            document.getElementById('metaUrgency').textContent = data.urgency;
+            document.getElementById('metaTaskType').textContent = data.taskType;
+            document.getElementById('metaSummary').textContent = data.summary;
+            document.getElementById('billingBadge').textContent = data.billingText;
+            document.getElementById('quotaProgressBar').style.width = data.quotaWidth;
+
+            const partiesEl = document.getElementById('metaPartiesList');
+            partiesEl.innerHTML = data.parties.map(p => `<li>${p}</li>`).join('');
+
+            const missingEl = document.getElementById('metaMissingList');
+            missingEl.innerHTML = data.missing.map(m => `<li>${m}</li>`).join('');
+        }
+
+        function appendMessageBubble(sender, text, badgeText) {
+            const container = document.getElementById('chatMessagesContainer');
+            const wrapper = document.createElement('div');
+            if (sender === 'client') {
+                wrapper.className = 'self-start max-w-[82%] bg-white border border-slate-200 rounded-2xl rounded-tr-sm px-3.5 py-2.5 shadow-sm text-xs text-slate-800';
+                wrapper.innerHTML = `<div class="font-bold text-[10px] text-depi-blue mb-0.5">العميل (Inbound Message)</div><div contenteditable="true">${text}</div>`;
+            } else {
+                wrapper.className = 'self-end max-w-[85%] bg-[#DCF8C6] border border-emerald-300 rounded-2xl rounded-tl-sm px-3.5 py-2.5 shadow-sm text-xs text-slate-900';
+                const badgeHtml = badgeText ? `<span class="bg-depi-darkGreen text-white text-[9px] font-bold px-2 py-0.5 rounded-full">${badgeText}</span>` : '';
+                wrapper.innerHTML = `
+                    <div class="flex items-center justify-between gap-2 mb-1">
+                        <span class="font-extrabold text-[10px] text-depi-darkGreen"><i class="fa-solid fa-robot me-1"></i>مساعد النظام القانوني الموحد</span>
+                        ${badgeHtml}
+                    </div>
+                    <div class="leading-relaxed" contenteditable="true">${text}</div>
+                `;
+            }
+            container.appendChild(wrapper);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function sendCustomChatMessage() {
+            const input = document.getElementById('customChatInput');
+            const val = input.value.trim();
+            if (!val) return;
+            appendMessageBubble('client', val);
+            input.value = '';
+
+            setTimeout(() => {
+                appendMessageBubble(
+                    'bot',
+                    'تم حفظ هذه المعلومة في ملف القضية التراكمي (`legal_ai_case_messages`). لتحديد الخطوة القانونية التالية بدقة: هل يوجد مستند رسمي أو إعلان قضائي مرتبط بهذه الواقعة؟',
+                    'Single-Question Intake'
+                );
+            }, 450);
+        }
+
+        function simulateMediaAttachment(type) {
+            if (type === 'pdf') {
+                appendMessageBubble('client', '📎 مرفق مستند: Contract_Draft_2026.pdf (تم الأرشفة في legal_ai_client_documents)');
+                setTimeout(() => {
+                    appendMessageBubble('bot', 'تم استخراج نص المستند عبر Gemini 2.5 Flash بنجاح. هل تود مراجعة مخاطر العقد بالكامل أم الاستفسار عن بند محدد؟', 'OCR & Document Extract');
+                }, 500);
+            } else {
+                appendMessageBubble('client', '🎙️ رسالة صوتية (0:42 ثانية) — جاري التفريغ عبر Gemini Audio Transcribe...');
+                setTimeout(() => {
+                    appendMessageBubble('bot', 'سمعت رسالتك الصوتية وفرغت تفاصيلها في الملف. بخصوص تاريخ الإنذار اللي ذكرته في التسجيل، هل تم إعلانه على يد محضر رسمياً؟', 'Audio Transcribed');
+                }, 500);
+            }
+        }
+
+        function setChatChannel(ch) {
+            const labels = {
+                whatsapp: 'WhatsApp WAHA',
+                telegram: 'Telegram Bot',
+                internal: 'Internal Lawyer Chat'
+            };
+            document.getElementById('activeChannelBadge').textContent = labels[ch];
+            ['whatsapp', 'telegram', 'internal'].forEach(k => {
+                const btn = document.getElementById('chBtn-' + k);
+                if (k === ch) {
+                    btn.className = 'px-2.5 py-1 rounded-lg bg-depi-emerald text-white font-bold flex items-center gap-1';
+                } else {
+                    btn.className = 'px-2.5 py-1 rounded-lg text-emerald-100 hover:text-white font-semibold flex items-center gap-1';
+                }
+            });
+        }
+
+        function setContractRole(role) {
+            ['distributor', 'supplier', 'neutral'].forEach(r => {
+                const btn = document.getElementById('roleBtn-' + r);
+                if (r === role) {
+                    btn.className = 'px-3 py-1 rounded-lg text-xs font-bold bg-depi-darkGreen text-white shadow-sm';
+                } else {
+                    btn.className = 'px-3 py-1 rounded-lg text-xs font-semibold bg-white text-slate-600 border border-slate-200 hover:border-depi-blue';
+                }
+            });
+        }
+
+        // Deadline Calculator Logic
+        function recalcDeadline() {
+            const days = parseInt(document.getElementById('dlProcedure').value, 10) || 40;
+            const startStr = document.getElementById('dlStartDate').value || '2026-10-01';
+            const startDate = new Date(startStr + 'T12:00:00Z');
+
+        // Toggle Language (Arabic RTL <-> English LTR)
+        function toggleLanguage() {
+            currentLang = currentLang === 'ar' ? 'en' : 'ar';
+            const htmlEl = document.documentElement;
+            htmlEl.setAttribute('lang', currentLang);
+            htmlEl.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
+
+            document.getElementById('langBtnText').textContent = currentLang === 'ar' ? 'English (LTR)' : 'العربية (RTL)';
+
+            // Update main localized titles
+            document.querySelectorAll('[data-ar][data-en]').forEach(el => {
+                el.textContent = currentLang === 'ar' ? el.getAttribute('data-ar') : el.getAttribute('data-en');
+            });
+
+            if (currentLang === 'en') {
+                document.getElementById('tabText-intake').textContent = '1. Smart Intake & Case Record Simulator';
+                document.getElementById('tabText-contracts').textContent = '2. Bilingual Contract Review PDF & Deadlines';
+                document.getElementById('tabText-lawyer').textContent = '3. Admin Dashboard & .gov.eg Legislative Monitor';
+                document.getElementById('tabText-slide3').textContent = '4. Slide 3 Full 3-Column Presentation View';
+                document.getElementById('pdfBtnText').textContent = 'Preview Bilingual PDF (AR/EN)';
+            } else {
+                document.getElementById('tabText-intake').textContent = '1. محاكي الاستقبال الذكي (Client Intake & Case Record)';
+                document.getElementById('tabText-contracts').textContent = '2. مراجعة العقود والمواعيد (Bilingual PDF & Deadlines)';
+                document.getElementById('tabText-lawyer').textContent = '3. لوحة الإدارة والرصد التشريعي (Admin & .gov.eg Monitor)';
+                document.getElementById('tabText-slide3').textContent = '4. عرض الشريحة 3 الكامل (Slide 3 Full 3-Column View)';
+                document.getElementById('pdfBtnText').textContent = 'معاينة التقرير المزدوج (AR/EN PDF)';
+            }
+        }
+
+        // Toggle Low-Fi Wireframe Mode
+        function toggleWireframeMode() {
+            wireframeActive = !wireframeActive;
+            const root = document.getElementById('appRoot');
+            const txt = document.getElementById('wfBtnText');
+            if (wireframeActive) {
+                root.classList.add('wireframe-mode');
+                txt.textContent = 'وضع التخطيط الهيكلي (Wireframe: مفعّل)';
+            } else {
+                root.classList.remove('wireframe-mode');
+                txt.textContent = 'وضع التخطيط الهيكلي (Wireframe: إيقاف)';
+            }
+        }
+
+        // Toggle UX Callouts
+        function toggleUXCallouts() {
+            uxCalloutsActive = !uxCalloutsActive;
+            document.querySelectorAll('.ux-callout').forEach(el => {
+                el.style.display = uxCalloutsActive ? 'flex' : 'none';
+            });
+            document.getElementById('uxBtnText').textContent = uxCalloutsActive ? 'ملاحظات UX: مفعّلة' : 'ملاحظات UX: مخفية';
+        }
+
+        // Bilingual PDF Modal Controls
+        function openPdfModal() {
+            const m = document.getElementById('pdfModal');
+            m.classList.remove('hidden');
+            m.classList.add('flex');
+        }
+        function closePdfModal() {
+            const m = document.getElementById('pdfModal');
+            m.classList.add('hidden');
+            m.classList.remove('flex');
+        }
+
+        // Initialize Default Scenario on Load
+        window.onload = function() {
+            loadScenario('rent');
+            recalcDeadline();
+        };
+    </script>
+</body>
+</html>

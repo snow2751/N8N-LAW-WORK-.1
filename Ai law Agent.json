@@ -1,0 +1,704 @@
+{
+  "name": "Unified Legal Assistant (Intake & Bilingual PDF Contract Review)",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "id": "ab0afa3e-795e-4591-be5f-36fc27425cdc",
+      "name": "Telegram Trigger",
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.5,
+      "position": [
+        528,
+        544
+      ],
+      "webhookId": "ff16ea37-1cd4-4b3b-adde-b1d69b0b832b",
+      "credentials": {
+        "telegramApi": {
+          "id": "nugpgcIAlftRGV58",
+          "name": "Telegram account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "check-doc-condition",
+              "leftValue": "={{ $json.message.document.file_id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "605dfb32-b678-4569-9f89-febe8178bbc8",
+      "name": "Has Document?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        768,
+        544
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "fileId": "={{ $json.message.document.file_id }}",
+        "additionalFields": {}
+      },
+      "id": "c0277596-5ad6-4e9a-a7c3-65b94b30ba6c",
+      "name": "Get a file",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1056,
+        272
+      ],
+      "webhookId": "7823acec-1829-4b15-865d-c327a91ee24b",
+      "credentials": {
+        "telegramApi": {
+          "id": "nugpgcIAlftRGV58",
+          "name": "Telegram account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "document",
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-3.5-flash-lite",
+          "mode": "list",
+          "cachedResultName": "Gemini 3.5 Flash Lite"
+        },
+        "text": "Review this contract from the perspective of the distributor (second party).\n\nIdentify the main legal and commercial risks for the distributor.\n\nFor each risk, provide ONLY the following:\n1. Contract Clause: identify the relevant clause number and quote the relevant part briefly.\n2. Risk: explain clearly why this clause is risky for the distributor.\n3. Proposed Clause: draft a revised clause that provides better protection to the distributor.\n\nFocus on:\n- Unlimited or excessive liability\n- Payment obligations\n- Penalties and indemnities\n- Termination rights\n- Exclusivity\n- Minimum purchase obligations\n- Product returns\n- Delivery and supply obligations\n- Compliance and sanctions\n- Intellectual property\n- Confidentiality\n- Governing law and dispute resolution\n- Force majeure\n- Any obligation that is one-sided against the distributor\n\nDo not give a general summary of the contract.\nDo not invent clause numbers or obligations that are not present in the contract.\nIf a risk is not clearly supported by the contract, do not include it.\n\nCRITICAL OUTPUT FORMAT:\nOutput ONLY a complete, valid, self-contained HTML5 document (without ```html or markdown code blocks) styled cleanly for PDF printing.\nThe HTML document MUST contain TWO complete versions of the analysis:\n1. SECTION 1 (English Version - dir=\"ltr\"):\n   Formatted with clean headings, structured cards/tables for each RISK (Clause, Risk, Proposed Clause).\n2. SECTION 2 (النسخة العربية - dir=\"rtl\" with page-break-before: always):\n   A complete, accurate, professional legal Arabic translation of all identified risks:\n   (البند التعاقدي، المخاطر القانونية والتجارية، الصياغة البديلة المقترحة).\n\nUse clean CSS styling (font-family: Arial/Tahoma, borders, colored headers #047954 and #336EA8, padding, and page-break-inside: avoid for risk cards).",
+        "inputType": "binary",
+        "options": {}
+      },
+      "id": "c4ef02af-337a-4559-a7e3-81eb6c95c52a",
+      "name": "Analyze document (Bilingual HTML)",
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        1296,
+        272
+      ],
+      "credentials": {
+        "googlePalmApi": {
+          "id": "r6xos7O1fmhPG3Og",
+          "name": "Google Gemini(PaLM) Api account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.pdfshift.io/v3/convert/pdf",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpTemplatedCustomAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"source\": {{ JSON.stringify($json.content.parts[0].text.replace(/```html/g, '').replace(/```/g, '')) }},\n  \"landscape\": false,\n  \"use_print\": true,\n  \"margin\": \"20px\"\n}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "id": "9b5f388f-7384-403c-b83c-cec1d912508a",
+      "name": "Generate Organized PDF",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1536,
+        272
+      ],
+      "credentials": {
+        "httpTemplatedCustomAuth": {
+          "id": "Vg5624HTl9i3SIE4",
+          "name": "Simplified Custom Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "sendDocument",
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "binaryData": true,
+        "additionalFields": {
+          "caption": "📄 مرفق تقرير مراجعة العقد المنظم (بالنسختين العربية والإنجليزية)."
+        }
+      },
+      "id": "cbae9c26-9328-4836-ac5b-07ba6eae10d6",
+      "name": "Send a document",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1776,
+        272
+      ],
+      "webhookId": "37d91647-8901-4afd-af06-d94d97817a4e",
+      "credentials": {
+        "telegramApi": {
+          "id": "nugpgcIAlftRGV58",
+          "name": "Telegram account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "text": "={{ $json.message.text }}",
+        "options": {
+          "systemMessage": "أنت مساعد قانوني مسؤول عن الاستقبال الأولي للعملاء.\nمهمتك:\n1. اطرح أسئلة قصيرة (سؤال واحد في كل مرة) لمعرفة: الأطراف، التواريخ الهامة، وموضوع النزاع.\n2. لا تقدم أي نصيحة قانونية.\n3. بمجرد أن يكمل العميل التفاصيل وتصبح الصورة واضحة، يجب أن يكون ردك حصرياً وبدون أي إضافات هو الكلمة التالية: [INTAKE_COMPLETE]\n\nإذا لم تكتمل البيانات، استمر في محادثة العميل بشكل طبيعي ولبق."
+        }
+      },
+      "id": "068e5ad3-9895-4fa5-8f9f-ce20f48d0df2",
+      "name": "AI Conversational Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1,
+      "position": [
+        1056,
+        672
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "4c6d8c28-1a5b-45c6-8e21-fa73930875a0",
+      "name": "Google Gemini Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        1056,
+        848
+      ],
+      "credentials": {
+        "googlePalmApi": {
+          "id": "r6xos7O1fmhPG3Og",
+          "name": "Google Gemini(PaLM) Api account 2"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "79ea4db6-a67b-4797-a3f8-8f0955fdac91",
+      "name": "Window Buffer Memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1,
+      "position": [
+        1200,
+        880
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "condition-1",
+              "leftValue": "={{ $json.output }}",
+              "rightValue": "[INTAKE_COMPLETE]",
+              "operator": {
+                "type": "string",
+                "operation": "contains",
+                "name": "filter.operator.contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "fc7ab46d-56c1-4a0d-8df7-c218a928c37b",
+      "name": "Is Intake Complete?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1312,
+        672
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "شكراً لك. لقد قمنا بجمع بياناتك وسيقوم المحامي المختص بمراجعتها والتواصل معك قريباً.",
+        "additionalFields": {}
+      },
+      "id": "966ed894-b58d-4dd4-b005-e1a70049e7fc",
+      "name": "Send Thank You",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1552,
+        576
+      ],
+      "webhookId": "d814f8f7-9559-486e-88e6-b15420e32951",
+      "credentials": {
+        "telegramApi": {
+          "id": "nugpgcIAlftRGV58",
+          "name": "Telegram account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "text": "استخرج البيانات من محادثة العميل الأخيرة.",
+        "options": {
+          "systemMessage": "قم باستخراج البيانات المهيكلة بناءً على سياق المحادثة المحفوظ في الذاكرة."
+        }
+      },
+      "id": "161a574f-888e-4ad1-a113-7d47ebdc6936",
+      "name": "Information Extractor",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1,
+      "position": [
+        1792,
+        576
+      ]
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o-mini",
+        "options": {}
+      },
+      "id": "0f349b60-8031-452a-96f2-8ed3d7c1b570",
+      "name": "OpenAI Chat Model Extractor",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        1760,
+        784
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "8qTfv8y1jKQPtNaR",
+          "name": "OpenAI account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "b4b0408f-7be2-4ddc-8dea-15d2b5617e2e",
+      "name": "Window Buffer Memory Extractor",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1,
+      "position": [
+        1920,
+        784
+      ]
+    },
+    {
+      "parameters": {
+        "jsonSchema": "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"Matter_Type\": {\n      \"type\": \"string\",\n      \"enum\": [\"Criminal\", \"Contract\", \"Litigation\", \"Corporate\", \"Employment\", \"Other\"]\n    },\n    \"Key_Facts\": {\n      \"type\": \"string\"\n    },\n    \"Missing_Information\": {\n      \"type\": \"string\"\n    },\n    \"Urgency_Level\": {\n      \"type\": \"string\",\n      \"enum\": [\"High\", \"Normal\"]\n    },\n    \"Summary\": {\n      \"type\": \"string\"\n    }\n  },\n  \"required\": [\"Matter_Type\", \"Key_Facts\", \"Missing_Information\", \"Urgency_Level\", \"Summary\"]\n}"
+      },
+      "id": "2e3363df-69b8-42a7-bc64-eb4ed5858c73",
+      "name": "Structured Output Parser",
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1,
+      "position": [
+        2080,
+        784
+      ]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "id": "cond-urgency-high",
+                    "leftValue": "={{ $json.Urgency_Level }}",
+                    "rightValue": "High",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "High Urgency"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "id": "cond-urgency-normal",
+                    "leftValue": "={{ $json.Urgency_Level }}",
+                    "rightValue": "Normal",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Normal Priority"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "db0558ff-9f22-4082-bf8d-ec3d224c7213",
+      "name": "Switch (Urgency Routing)",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3,
+      "position": [
+        2080,
+        576
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "YOUR_ADMIN_CHAT_ID",
+        "text": "=🚨 تنبيه طارئ: حالة قانونية مستعجلة!\nالنوع: {{ $json.Matter_Type }}\nالملخص: {{ $json.Summary }}",
+        "additionalFields": {}
+      },
+      "id": "b8cd4478-6205-463b-ae93-40c0617c36b2",
+      "name": "Admin Telegram Notification",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        2336,
+        480
+      ],
+      "webhookId": "40ee8f98-585c-4532-a304-d2da081b5198",
+      "credentials": {
+        "telegramApi": {
+          "id": "nugpgcIAlftRGV58",
+          "name": "Telegram account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resume": "webhook",
+        "options": {}
+      },
+      "id": "dbddd257-b642-4326-9f9d-34a3e84a9987",
+      "name": "Human Approval (Wait)",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [
+        2336,
+        656
+      ],
+      "webhookId": "ab2ab773-b98e-4dfa-a40a-16a5a409d965"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_GOOGLE_SHEET_ID_HERE",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Sheet1",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Matter_Type": "={{ $json.Matter_Type }}",
+            "Key_Facts": "={{ $json.Key_Facts }}",
+            "Missing_Information": "={{ $json.Missing_Information }}",
+            "Summary": "={{ $json.Summary }}"
+          },
+          "matchingColumns": []
+        },
+        "options": {}
+      },
+      "id": "9037f207-d533-4bdd-8038-b26f2c785d81",
+      "name": "Structured Case Record",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        2560,
+        656
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "={{ $json.output }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "id": "3fc2c5b5-ca83-4d08-8f71-854c96b05e77",
+      "name": "Send Reply to Client",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1552,
+        800
+      ],
+      "webhookId": "e400b6d3-e4ca-4008-a467-8299532cfacd",
+      "credentials": {
+        "telegramApi": {
+          "id": "nugpgcIAlftRGV58",
+          "name": "Telegram account 2"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Has Document?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Has Document?": {
+      "main": [
+        [
+          {
+            "node": "Get a file",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "AI Conversational Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get a file": {
+      "main": [
+        [
+          {
+            "node": "Analyze document (Bilingual HTML)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyze document (Bilingual HTML)": {
+      "main": [
+        [
+          {
+            "node": "Generate Organized PDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Organized PDF": {
+      "main": [
+        [
+          {
+            "node": "Send a document",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Conversational Agent": {
+      "main": [
+        [
+          {
+            "node": "Is Intake Complete?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Conversational Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Window Buffer Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Conversational Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is Intake Complete?": {
+      "main": [
+        [
+          {
+            "node": "Send Thank You",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send Reply to Client",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Thank You": {
+      "main": [
+        [
+          {
+            "node": "Information Extractor",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Information Extractor": {
+      "main": [
+        [
+          {
+            "node": "Switch (Urgency Routing)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model Extractor": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Information Extractor",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Window Buffer Memory Extractor": {
+      "ai_memory": [
+        [
+          {
+            "node": "Information Extractor",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Information Extractor",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch (Urgency Routing)": {
+      "main": [
+        [
+          {
+            "node": "Admin Telegram Notification",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Human Approval (Wait)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Human Approval (Wait)": {
+      "main": [
+        [
+          {
+            "node": "Structured Case Record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "6e9aa9d5-6d42-4abe-a90b-5ad1f0689a93",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "d84a16441bf510ee82d7e963207aaa912f81105d680bf4038221544b72a9097e"
+  },
+  "nodeGroups": [],
+  "id": "Xao9J7jZVWCrj8N1",
+  "tags": []
+}
